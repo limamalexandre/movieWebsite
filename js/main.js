@@ -1,7 +1,7 @@
 const options = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': '',
+        'X-RapidAPI-Key': '7a519ad9e6msh5734074ce93d0e0p199987jsn262adf298f6a',
         'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
     }
 };
