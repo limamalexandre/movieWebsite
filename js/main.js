@@ -6,16 +6,116 @@ const options = {
     }
 };
 
-fetch('https://imdb8.p.rapidapi.com/title/v2/find?title=game&titleType=movie&limit=10&sortArg=alpha%2Casc', options)
-    .then(response => response.json())
-    .then(response => {
-        const list = response.results;
+// GET TOP RATED MOVIES
+fetch('https://imdb8.p.rapidapi.com/title/get-top-rated-movies', options)
+	.then(response => response.json())
+	.then(response => {
+        for (i=0; i<5; i++) {
+            let id = response[i].id;
+            let tt = id.split('/')[2];
 
-        list.map((item => {
-            const title = item.title;
-            const poster = item.image.url;
-            const movie = `<li><img src="${poster}"> <h2>${title}</h2></li>`;
-            document.querySelector('.movies').innerHTML += movie;
-        }))
+            fetch(`https://imdb8.p.rapidapi.com/title/find?q=${tt}`, options)
+            .then(response => response.json())
+            .then(data => { 
+                let info = data.results[0];
+                let card = `<li class="item">
+                                <div class="latest-box">
+                                    <div class="latest-box-img">
+                                        <img src="${info.image.url}" alt="top rated movie">
+                                    </div>
+                                    <div class="latest-box-text">
+                                        <strong>${info.title}</strong>
+                                        <p>${info.year}</p>
+                                    </div>
+                                </div>
+                            </li>`; 
+                document.getElementById('autoWidth').innerHTML += card; 
+            })
+            .catch(err => console.error(err)); 
+        }
+
+        setTimeout(() => {
+            for (i=5; i<8; i++) {
+                let id = response[i].id;
+                let tt = id.split('/')[2];
+    
+                fetch(`https://imdb8.p.rapidapi.com/title/find?q=${tt}`, options)
+                .then(response => response.json())
+                .then(data => { 
+                    let info = data.results[0];
+                    let card = `<li class="item">
+                                    <div class="latest-box">
+                                        <div class="latest-box-img">
+                                            <img src="${info.image.url}" alt="top rated movie">
+                                        </div>
+                                        <div class="latest-box-text">
+                                            <strong>${info.title}</strong>
+                                            <p>${info.year}</p>
+                                        </div>
+                                    </div>
+                                </li>`; 
+                    document.getElementById('autoWidth').innerHTML += card; 
+                })
+                .catch(err => console.error(err)); 
+            }
+        }, 1100); 
     })
-    .catch(err => console.error(err));
+	.catch(err => console.error(err));
+
+// GET COMMING SOON MOVIES
+setTimeout(() => {
+    fetch('https://imdb8.p.rapidapi.com/title/get-most-popular-movies?homeCountry=US&purchaseCountry=US&currentCountry=US', options)
+	.then(response => response.json())
+	.then(response => {
+        for (i=0; i<5; i++) {
+            let id = response[i];
+            let tt = id.split('/')[2];
+
+            fetch(`https://imdb8.p.rapidapi.com/title/find?q=${tt}`, options)
+            .then(response => response.json())
+            .then(data => { 
+                let info = data.results[0];
+                let card = `<li class="item">
+                                <div class="latest-box">
+                                    <div class="latest-box-img">
+                                        <img src="${info.image.url}" alt="top rated movie">
+                                    </div>
+                                    <div class="latest-box-text">
+                                        <strong>${info.title}</strong>
+                                        <p>${info.year}</p>
+                                    </div>
+                                </div>
+                            </li>`; 
+                document.getElementById('autoWidth2').innerHTML += card; 
+            })
+            .catch(err => console.error(err));
+        }
+        
+        setTimeout(() => {
+            for (i=5; i<8; i++) {
+                let id = response[i];
+                let tt = id.split('/')[2];
+    
+                fetch(`https://imdb8.p.rapidapi.com/title/find?q=${tt}`, options)
+                .then(response => response.json())
+                .then(data => { 
+                    let info = data.results[0];
+                    let card = `<li class="item">
+                                    <div class="latest-box">
+                                        <div class="latest-box-img">
+                                            <img src="${info.image.url}" alt="top rated movie">
+                                        </div>
+                                        <div class="latest-box-text">
+                                            <strong>${info.title}</strong>
+                                            <p>${info.year}</p>
+                                        </div>
+                                    </div>
+                                </li>`; 
+                    document.getElementById('autoWidth2').innerHTML += card; 
+                })
+                .catch(err => console.error(err)); 
+            }
+        }, 1500);
+    })
+	.catch(err => console.error(err));
+}, 4000);
