@@ -133,7 +133,7 @@ setTimeout(() => {
                 })
                 .catch(err => console.error(err)); 
             }
-        }, 1750);
+        }, 2000);
     })
 	.catch(err => console.error(err));
 }, 4000);
@@ -141,7 +141,7 @@ setTimeout(() => {
 var myVar;
 
 function loading() {
-  myVar = setTimeout(showPage, 7000);
+  myVar = setTimeout(showPage, 8000);
 }
 
 function showPage() {

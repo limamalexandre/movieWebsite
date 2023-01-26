@@ -65,7 +65,7 @@ function popularByGenre(genre) {
                 })
                 .catch(err => console.error(err)); 
             }
-        }, 1500); 
+        }, 1750); 
     })
 	.catch(err => console.error(err));
 }
