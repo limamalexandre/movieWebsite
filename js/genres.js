@@ -7,10 +7,10 @@ const options = {
 };
 
 function popularByGenre(genre) {
-    fetch(`https://imdb8.p.rapidapi.com/title/v2/get-popular-movies-by-genre?genre=${genre}&limit=8`, options)
+    fetch(`https://imdb8.p.rapidapi.com/title/v2/get-popular-movies-by-genre?genre=${genre}&limit=10`, options)
 	.then(response => response.json())
 	.then(response => {
-        for (i=0; i<5; i++) {
+        for (i=0; i<4; i++) {
             let id = response[i];
             let tt = id.split('/')[2];
 
@@ -38,7 +38,7 @@ function popularByGenre(genre) {
             .catch(err => console.error(err)); 
         }
         setTimeout(() => {
-            for (i=5; i<8; i++) {
+            for (i=4; i<8; i++) {
                 let id = response[i];
                 let tt = id.split('/')[2];
     
@@ -65,7 +65,7 @@ function popularByGenre(genre) {
                 })
                 .catch(err => console.error(err)); 
             }
-        }, 2000); 
+        }, 1500); 
     })
 	.catch(err => console.error(err));
 }
@@ -73,7 +73,7 @@ function popularByGenre(genre) {
 var myVar;
 
 function loading() {
-    myVar = setTimeout(showPage, 7000);
+    myVar = setTimeout(showPage, 5000);
 }
   
 function showPage() {

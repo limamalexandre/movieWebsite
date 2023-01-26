@@ -10,7 +10,7 @@ const options = {
 fetch('https://imdb8.p.rapidapi.com/title/get-top-rated-movies', options)
 	.then(response => response.json())
 	.then(response => {
-        for (i=0; i<5; i++) {
+        for (i=0; i<4; i++) {
             let id = response[i].id;
             let tt = id.split('/')[2];
 
@@ -40,14 +40,13 @@ fetch('https://imdb8.p.rapidapi.com/title/get-top-rated-movies', options)
         }
 
         setTimeout(() => {
-            for (i=5; i<8; i++) {
+            for (i=4; i<8; i++) {
                 let id = response[i].id;
                 let tt = id.split('/')[2];
     
                 fetch(`https://imdb8.p.rapidapi.com/title/find?q=${tt}`, options)
                 .then(response => response.json())
                 .then(data => { 
-                    console.log(data);
                     let info = data.results[0];
                     if(info.title.length > 22) {
                         let aux = info.title.slice(0,21) + '...';
@@ -74,10 +73,11 @@ fetch('https://imdb8.p.rapidapi.com/title/get-top-rated-movies', options)
 
 // GET COMMING SOON MOVIES
 setTimeout(() => {
+    console.log('yo')
     fetch('https://imdb8.p.rapidapi.com/title/get-most-popular-movies?homeCountry=US&purchaseCountry=US&currentCountry=US', options)
 	.then(response => response.json())
 	.then(response => {
-        for (i=0; i<5; i++) {
+        for (i=0; i<4; i++) {
             let id = response[i];
             let tt = id.split('/')[2];
 
@@ -106,7 +106,7 @@ setTimeout(() => {
         }
         
         setTimeout(() => {
-            for (i=5; i<8; i++) {
+            for (i=4; i<8; i++) {
                 let id = response[i];
                 let tt = id.split('/')[2];
     
@@ -133,10 +133,10 @@ setTimeout(() => {
                 })
                 .catch(err => console.error(err)); 
             }
-        }, 1500);
+        }, 1750);
     })
 	.catch(err => console.error(err));
-}, 3000);
+}, 4000);
 
 var myVar;
 
