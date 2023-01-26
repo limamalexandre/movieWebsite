@@ -18,6 +18,11 @@ fetch('https://imdb8.p.rapidapi.com/title/get-top-rated-movies', options)
             .then(response => response.json())
             .then(data => { 
                 let info = data.results[0];
+                if(info.title.length > 22) {
+                    let aux = info.title.slice(0,21) + '...';
+                    info.title = aux;
+                }
+
                 let card = `<li class="item">
                                 <div class="latest-box">
                                     <div class="latest-box-img">
@@ -42,7 +47,12 @@ fetch('https://imdb8.p.rapidapi.com/title/get-top-rated-movies', options)
                 fetch(`https://imdb8.p.rapidapi.com/title/find?q=${tt}`, options)
                 .then(response => response.json())
                 .then(data => { 
+                    console.log(data);
                     let info = data.results[0];
+                    if(info.title.length > 22) {
+                        let aux = info.title.slice(0,21) + '...';
+                        info.title = aux;
+                    }
                     let card = `<li class="item">
                                     <div class="latest-box">
                                         <div class="latest-box-img">
@@ -58,7 +68,7 @@ fetch('https://imdb8.p.rapidapi.com/title/get-top-rated-movies', options)
                 })
                 .catch(err => console.error(err)); 
             }
-        }, 1100); 
+        }, 1500); 
     })
 	.catch(err => console.error(err));
 
@@ -75,6 +85,10 @@ setTimeout(() => {
             .then(response => response.json())
             .then(data => { 
                 let info = data.results[0];
+                if(info.title.length > 22) {
+                    let aux = info.title.slice(0,21) + '...';
+                    info.title = aux;
+                }
                 let card = `<li class="item">
                                 <div class="latest-box">
                                     <div class="latest-box-img">
@@ -100,6 +114,10 @@ setTimeout(() => {
                 .then(response => response.json())
                 .then(data => { 
                     let info = data.results[0];
+                    if(info.title.length > 22) {
+                        let aux = info.title.slice(0,21) + '...';
+                        info.title = aux;
+                    }
                     let card = `<li class="item">
                                     <div class="latest-box">
                                         <div class="latest-box-img">
@@ -118,4 +136,16 @@ setTimeout(() => {
         }, 1500);
     })
 	.catch(err => console.error(err));
-}, 4000);
+}, 3000);
+
+var myVar;
+
+function loading() {
+  myVar = setTimeout(showPage, 7000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("main").style.display = "block";
+  document.getElementById("latest").style.display = "block";
+}

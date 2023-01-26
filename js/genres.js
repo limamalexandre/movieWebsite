@@ -18,6 +18,10 @@ function popularByGenre(genre) {
             .then(response => response.json())
             .then(data => { 
                 let info = data.results[0];
+                if(info.title.length > 22) {
+                    let aux = info.title.slice(0,21) + '...';
+                    info.title = aux;
+                }
                 let card = `<li class="item">
                                 <div class="latest-box">
                                     <div class="latest-box-img">
@@ -42,6 +46,10 @@ function popularByGenre(genre) {
                 .then(response => response.json())
                 .then(data => { 
                     let info = data.results[0];
+                    if(info.title.length > 22) {
+                        let aux = info.title.slice(0,21) + '...';
+                        info.title = aux;
+                    }
                     let card = `<li class="item">
                                     <div class="latest-box">
                                         <div class="latest-box-img">
@@ -57,7 +65,18 @@ function popularByGenre(genre) {
                 })
                 .catch(err => console.error(err)); 
             }
-        }, 1500); 
+        }, 2000); 
     })
 	.catch(err => console.error(err));
+}
+
+var myVar;
+
+function loading() {
+    myVar = setTimeout(showPage, 7000);
+}
+  
+function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("main").style.display = "block";
 }
